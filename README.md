@@ -1,6 +1,6 @@
 # Domain learnme.json open specification
 
-<b>learnme.json</b> file is the proposal for describing learning possibilities available under each domain address, where it is placed on. Learning possibilities may include guides, courses, trainings or other educational resources available at the given website.
+<b>learnme.json</b> file is the proposal for describing learning possibilities available under Internet domains. Learning possibilities may include guides, courses, trainings or other educational resources available at the given website.
 
 Specification is adopted by [learntray.com](https://learntray.com) to keep track of users learning progress on Internet websites.
 
@@ -12,47 +12,50 @@ Specification is adopted by [learntray.com](https://learntray.com) to keep track
 
 ## Specification
 
-Specification of `learnme.json` version `0.1.0`.
+Specification of `learnme.json` version `1.0.0`.
 
 ### Specific parameters
 
-| Object                    | Description                                                                                                                                                                |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `learnme`                 | learnme file specification version.                                                                                                                                        |
-| `version`                 | File version.                                                                                                                                                              |
-| `agreement`               | Agreement for collecting and processing data described in learnme file given for specified individuals.                                                                    |
-| `organisations`           | List of available organisations under given domain.                                                                                                                        |
-| `authors`                 | List of available authors under given domain.                                                                                                                              |
-| `resources`               | List of available learning resources (guides, courses or trainings) under given domain.                                                                                    |
-| `resources.type`          | `Guide` or `Course`.                                                                                                                                                       |
-| `resources.categories`    | Categories to which resource can be assigned.                                                                                                                              |
-| `resources.prerequisites` | Prerequisites which must be learned before learning resource. Must be identifier (url) of resource or resource part described in learnme file of the same or other domain. |
-| `resources.owners`        | Authors of the resource. Must be identifier (url) of owner described in learnme file of the same or other domain.                                                          |
-| `resources.authors`       | Authors of the resource. Must be identifier (email) of author described in learnme file of the same or other domain.                                                       |
-| `resources.parts`         | Parts of which the resource is composed.                                                                                                                                   |
+| Object                    | Description                                                                                                                                                                      |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `learnme`                 | learnme file specification version.                                                                                                                                              |
+| `agreement`               | Agreement for collecting and processing data described in learnme file given for specified individuals.                                                                          |
+| `organisations`           | List of available organisations under given domain.                                                                                                                              |
+| `organisations.id`        | Unique organisation identifier. By convention format `organisation.domain.com` might be used to allow referencing the organisation on the whole Internet without name collision. |
+| `authors`                 | List of available authors under given domain.                                                                                                                                    |
+| `resources`               | List of available learning resources (guides, courses or trainings) under given domain.                                                                                          |
+| `resources.id`            | Unique resource identifier. By convention format `resource.domain.com` might be used to allow referencing the resource on the whole Internet without name collision.             |
+| `resources.version`       | Version of the resource.                                                                                                                                                         |
+| `resources.type`          | `Guide` or `Course`.                                                                                                                                                             |
+| `resources.categories`    | Categories to which resource can be assigned.                                                                                                                                    |
+| `resources.prerequisites` | Prerequisites which must be learned before learning resource. Must be identifier of resource described in learnme file of the same or other domain.                              |
+| `resources.owners`        | Authors of the resource. Must be identifier of owner described in learnme file of the same or other domain.                                                                      |
+| `resources.authors`       | Authors of the resource. Must be identifier (email) of author described in learnme file of the same or other domain.                                                             |
+| `resources.parts`         | Parts of which the resource is composed.                                                                                                                                         |
+| `parts`                   | Parts of resources, referenced in resources.                                                                                                                                     |
 
 ### Common parameters
 
-| Object        | Description                                                                                                                                                                                                                                                                                                        |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `name`        | Name of the thing.                                                                                                                                                                                                                                                                                                 |
-| `description` | Description of the thing.                                                                                                                                                                                                                                                                                          |
-| `url`         | Url address under which given thing may be accessed. Is treated as unique course or course resource identifier. Url domain must be the same as the current domain name or may be not included at all (meaning that the path is relative to the current domain) - you can't define anything outside of your domain. |
+| Object        | Description                                                                                                                                                                                                                                             |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`        | Name of the thing.                                                                                                                                                                                                                                      |
+| `description` | Description of the thing.                                                                                                                                                                                                                               |
+| `url`         | Url address under which given thing may be accessed. Url domain must be the same as the current domain name or may be not included at all (meaning that the path is relative to the current domain) - you can't define anything outside of your domain. |
 
 ### Example
 
 ```json
 {
-  "learnme": "0.1.0",
-  "version": "1.0.0",
+  "learnme": "1.0.0",
   "agreement": {
     "agreement": "As an owner of the website I agree for agreement individuals to collect and process data described here for period of time described in agreement duration and for the purposes described in agreement scopes.",
     "duration": "6 months from now",
     "individuals": ["example-individual.com"],
-    "scopes": ["learning", "teaching"]
+    "scopes": ["education tracking", "education planing"]
   },
   "organisations": [
     {
+      "id": "example.example.com",
       "name": "Example",
       "url": "https://example.com",
       "admin": "admin@example.com",
@@ -67,6 +70,8 @@ Specification of `learnme.json` version `0.1.0`.
   ],
   "resources": [
     {
+      "id": "introduction.example.com",
+      "version": 1,
       "name": "Introduction",
       "type": "Guide",
       "categories": ["Software development"],
@@ -75,21 +80,23 @@ Specification of `learnme.json` version `0.1.0`.
       "owners": ["https://example.com"],
       "authors": ["adam@example.com"],
       "prerequisites": [
-        "https://dependent-example.com/guides/introduction/first-chapter",
-        "https://dependent-example.com/guides/introduction/second-chapter"
+        "first.guides.dependent-example.com",
+        "second.guides.dependent-example.com"
       ],
       "parts": [
         {
-          "name": "Getting started",
-          "url": "https://example.com/guides/introduction/getting-started"
+          "ref": "introduction-getting-started",
+          "order": 1
         },
         {
-          "name": "Setup",
-          "url": "https://example.com/guides/introduction/setup"
+          "ref": "introduction-setup",
+          "order": 2
         }
       ]
     },
     {
+      "id": "architecture-overview.example.com",
+      "version": 1,
       "name": "Architecture Overview",
       "type": "Guide",
       "categories": ["Software development"],
@@ -97,21 +104,63 @@ Specification of `learnme.json` version `0.1.0`.
       "description": "Example Architecture Overview Guide",
       "owners": ["https://example.com"],
       "authors": ["adam@example.com"],
-      "prerequisites": ["https://dependent-example.com/guides/introduction"],
+      "prerequisites": ["introduction.example.com"],
       "parts": [
         {
-          "name": "Frontend",
-          "url": "https://example.com/guides/architecture-overview/frontend"
+          "ref": "architecture-overview-frontend",
+          "order": 1
         },
         {
-          "name": "Backend",
-          "url": "https://example.com/guides/architecture-overview/backend"
+          "ref": "architecture-overview-backend",
+          "order": 2
         },
         {
-          "name": "Connection",
-          "url": "https://example.com/guides/architecture-overview/connection"
+          "ref": "architecture-overview-connection",
+          "order": 3
         }
       ]
+    }
+  ],
+  "parts": [
+    {
+      "id": "introduction-getting-started",
+      "name": "Getting started",
+      "description": "",
+      "url": "https://example.com/guides/introduction/getting-started",
+      "type": "Article",
+      "language": "en"
+    },
+    {
+      "id": "introduction-setup",
+      "name": "Setup",
+      "description": "",
+      "url": "https://example.com/guides/introduction/setup",
+      "type": "Article",
+      "language": "en"
+    },
+    {
+      "id": "architecture-overview-frontend",
+      "name": "Frontend",
+      "description": "",
+      "url": "https://example.com/guides/architecture-overview/frontend",
+      "type": "Article",
+      "language": "en"
+    },
+    {
+      "id": "architecture-overview-backend",
+      "name": "Backend",
+      "description": "",
+      "url": "https://example.com/guides/architecture-overview/backend",
+      "type": "Article",
+      "language": "en"
+    },
+    {
+      "id": "architecture-overview-connection",
+      "name": "Connection",
+      "description": "",
+      "url": "https://example.com/guides/architecture-overview/connection",
+      "type": "Article",
+      "language": "en"
     }
   ]
 }
