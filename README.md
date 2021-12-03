@@ -12,27 +12,28 @@ Specification is adopted by [learntray.com](https://learntray.com) to keep track
 
 ## Specification
 
-Specification of `learnme.json` version `1.0.0`.
+Specification of `learnme.json` version `1.1.0`.
 
 ### Specific parameters
 
-| Object                    | Description                                                                                                                                                                      |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `learnme`                 | learnme file specification version.                                                                                                                                              |
-| `agreement`               | Agreement for collecting and processing data described in learnme file given for specified individuals.                                                                          |
-| `organisations`           | List of available organisations under given domain.                                                                                                                              |
-| `organisations.id`        | Unique organisation identifier. By convention format `organisation.domain.com` might be used to allow referencing the organisation on the whole Internet without name collision. |
-| `authors`                 | List of available authors under given domain.                                                                                                                                    |
-| `resources`               | List of available learning resources (guides, courses or trainings) under given domain.                                                                                          |
-| `resources.id`            | Unique resource identifier. By convention format `resource.domain.com` might be used to allow referencing the resource on the whole Internet without name collision.             |
-| `resources.version`       | Version of the resource.                                                                                                                                                         |
-| `resources.type`          | `Guide` or `Course`.                                                                                                                                                             |
-| `resources.categories`    | Categories to which resource can be assigned.                                                                                                                                    |
-| `resources.prerequisites` | Prerequisites which must be learned before learning resource. Must be identifier of resource described in learnme file of the same or other domain.                              |
-| `resources.owners`        | Authors of the resource. Must be identifier of owner described in learnme file of the same or other domain.                                                                      |
-| `resources.authors`       | Authors of the resource. Must be identifier (email) of author described in learnme file of the same or other domain.                                                             |
-| `resources.parts`         | Parts of which the resource is composed.                                                                                                                                         |
-| `parts`                   | Parts of resources, referenced in resources.                                                                                                                                     |
+| Object                    | Description                                                                                                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `learnme`                 | learnme file specification version.                                                                                                                                                                    |
+| `agreement`               | Agreement for collecting and processing data described in learnme file given for specified individuals.                                                                                                |
+| `api`                     | Learn API under which authorised details of learning content can be fetched and modified, details like e.g. user learning progress. Learn API specification proposal can be found [here](LEARNAPI.md). |
+| `organisations`           | List of available organisations under given domain.                                                                                                                                                    |
+| `organisations.id`        | Unique organisation identifier. By convention format `organisation.domain.com` might be used to allow referencing the organisation on the whole Internet without name collision.                       |
+| `authors`                 | List of available authors under given domain.                                                                                                                                                          |
+| `resources`               | List of available learning resources (guides, courses or trainings) under given domain.                                                                                                                |
+| `resources.id`            | Unique resource identifier. By convention format `resource.domain.com` might be used to allow referencing the resource on the whole Internet without name collision.                                   |
+| `resources.version`       | Version of the resource.                                                                                                                                                                               |
+| `resources.type`          | `Guide` or `Course`.                                                                                                                                                                                   |
+| `resources.categories`    | Categories to which resource can be assigned.                                                                                                                                                          |
+| `resources.prerequisites` | Prerequisites which must be learned before learning resource. Must be identifier of resource described in learnme file of the same or other domain.                                                    |
+| `resources.owners`        | Authors of the resource. Must be identifier of owner described in learnme file of the same or other domain.                                                                                            |
+| `resources.authors`       | Authors of the resource. Must be identifier (email) of author described in learnme file of the same or other domain.                                                                                   |
+| `resources.parts`         | Parts of which the resource is composed.                                                                                                                                                               |
+| `parts`                   | Parts of resources, referenced in resources.                                                                                                                                                           |
 
 ### Common parameters
 
@@ -46,12 +47,16 @@ Specification of `learnme.json` version `1.0.0`.
 
 ```json
 {
-  "learnme": "1.0.0",
+  "learnme": "1.1.0",
   "agreement": {
     "agreement": "As an owner of the website I agree for agreement individuals to collect and process data described here for period of time described in agreement duration and for the purposes described in agreement scopes.",
     "duration": "6 months from now",
     "individuals": ["example-individual.com"],
     "scopes": ["education tracking", "education planing"]
+  },
+  "api": {
+    "version": "1.0.0",
+    "url": "https://example.com/learnapi"
   },
   "organisations": [
     {
