@@ -59,14 +59,14 @@ Request:
 REST API:
 
 ```http
-GET `/learnapi/items` HTTP/1.1
+GET /learnapi/items HTTP/1.1
 Authorization: Bearer <optional-auth-token>
 ```
 
 GRAPHQL:
 
 ```http
-GET `/learnapi` HTTP/1.1
+GET /learnapi HTTP/1.1
 Authorization: Bearer <optional-auth-token>
 ```
 
@@ -135,14 +135,14 @@ Request:
 REST API:
 
 ```http
-GET `/learnapi/state` HTTP/1.1
+GET /learnapi/state HTTP/1.1
 Authorization: Bearer <optional-auth-token>
 ```
 
 GRAPHQL:
 
 ```http
-GET `/learnapi` HTTP/1.1
+GET /learnapi HTTP/1.1
 Authorization: Bearer <optional-auth-token>
 ```
 
