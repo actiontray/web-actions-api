@@ -228,4 +228,4 @@ HTTP/1.1 200 OK
 
 The specification is initially developed by [@orzechdev](https://github.com/orzechdev). If you have any questions or feedback please create an issue in this repository.
 
-For previous deprecated `learnme.json` specification file please go [here](LEARNAPI.md).
+For previous deprecated `learnme.json` specification file please go [here](LEARNME.md).
