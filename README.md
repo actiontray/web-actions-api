@@ -4,6 +4,8 @@
 
 This is an RFC, so if you have some ideas or thoughts regarding it, please submit an issue in this repository.
 
+The working example of Learn API you can find in [the exemplary Next.js project](https://github.com/orzechdev/learn-api-example).
+
 ## Table of content
 
 - [Specification](#specification)
