@@ -16,9 +16,7 @@ The working example of Learn API you can find in [the exemplary Next.js project]
 
 Specification of `Learn API` version `1.0.0-rfc-0`.
 
-Learn API can be implemented using `REST API` or `GRAPHQL`.
-
-### REST API
+Learn API can be implemented using `REST API` with the following endpoints:
 
 `/learnapi/items`
 
@@ -28,66 +26,18 @@ Returns JSON with items representing available learning content.
 
 Returns JSON with learning state for learning items returned in `/learnapi/items`.
 
-### GRAPHQL
-
-`/learnapi`
-
-```
-items {
-  ...
-}
-```
-
-Returns items representing available learning content.
-
-`/learnapi`
-
-```
-state {
-  ...
-}
-```
-
-Returns learning state for learning items returned in items query.
-
 ## Examples
-
-### REST API
 
 1. Query for available learing content
 
 Request:
-
-REST API:
 
 ```http
 GET /learnapi/items HTTP/1.1
 Authorization: Bearer <optional-auth-token>
 ```
 
-GRAPHQL:
-
-```http
-GET /learnapi HTTP/1.1
-Authorization: Bearer <optional-auth-token>
-```
-
-```graphql
-query getItems() {
-  items {
-    id
-    name
-    url
-    description
-    completeness
-    steps
-  }
-}
-```
-
 Response:
-
-REST API and GRAPHQL:
 
 ```http
 HTTP/1.1 200 OK
@@ -134,34 +84,12 @@ HTTP/1.1 200 OK
 
 Request:
 
-REST API:
-
 ```http
 GET /learnapi/state HTTP/1.1
 Authorization: Bearer <optional-auth-token>
 ```
 
-GRAPHQL:
-
-```http
-GET /learnapi HTTP/1.1
-Authorization: Bearer <optional-auth-token>
-```
-
-```graphql
-query getState() {
-  state {
-    userId
-    itemId
-    completeness
-    steps
-  }
-}
-```
-
 Response:
-
-REST API and GRAPHQL:
 
 ```http
 HTTP/1.1 200 OK
