@@ -52,9 +52,7 @@ Response:
 
 ```http
 HTTP/1.1 200 OK
-```
 
-```json
 {
   "learnapi": "1.0.0-rfc-1"
 }
@@ -73,9 +71,7 @@ Response:
 
 ```http
 HTTP/1.1 200 OK
-```
 
-```json
 {
   "learnapi": "1.0.0-rfc-1",
   "items": [
@@ -83,7 +79,7 @@ HTTP/1.1 200 OK
       "id": "introduction.example.com",
       "name": "Website Introduction Article",
       "url": "https://example.com/introductions/example",
-      "description": "Example Introduction Article",
+      "description": "Example Introduction Article"
     },
     {
       "id": "tutorial.example.com",
@@ -93,19 +89,19 @@ HTTP/1.1 200 OK
       "steps": [
         {
           "id": "step-1",
-          "name": "Step 1",
+          "name": "Step 1"
         },
         {
           "id": "step-2",
-          "name": "Step 2",
-        }
+          "name": "Step 2"
+        },
         {
           "id": "step-3",
-          "name": "Step 3",
+          "name": "Step 3"
         }
       ]
-    },
-  ],
+    }
+  ]
 }
 ```
 
@@ -122,21 +118,19 @@ Response:
 
 ```http
 HTTP/1.1 200 OK
-```
 
-```json
 {
   "learnapi": "1.0.0-rfc-1",
   "state": [
     {
       "userId": "john",
       "itemId": "introduction.example.com",
-      "completed": true,
+      "completed": true
     },
     {
       "userId": "adam",
       "itemId": "introduction.example.com",
-      "completed": true,
+      "completed": true
     },
     {
       "userId": "john",
@@ -149,7 +143,7 @@ HTTP/1.1 200 OK
         {
           "id": "step-2",
           "completed": true
-        }
+        },
         {
           "id": "step-3",
           "completed": true
@@ -167,13 +161,13 @@ HTTP/1.1 200 OK
         {
           "id": "step-2",
           "completed": false
-        }
+        },
         {
           "id": "step-3",
           "completed": false
         }
       ]
-    },
+    }
   ]
 }
 ```
@@ -191,9 +185,7 @@ Response:
 
 ```http
 HTTP/1.1 200 OK
-```
 
-```json
 {
   "learnapi": "1.0.0-rfc-1",
   "authToken": "<auth-token>"
@@ -213,9 +205,7 @@ Response:
 
 ```http
 HTTP/1.1 200 OK
-```
 
-```json
 {
   "learnapi": "1.0.0-rfc-1",
   "learningToken": "<learning-token>"
@@ -234,9 +224,7 @@ Response:
 
 ```http
 HTTP/1.1 200 OK
-```
 
-```json
 {
   "learnapi": "1.0.0-rfc-1",
   "learningToken": "<learning-token>"
@@ -250,9 +238,7 @@ Request:
 ```http
 POST /learnapi/join HTTP/1.1
 Authorization: Bearer <learning-token>
-```
 
-```json
 {
   "learnapi": "1.0.0-rfc-1",
   "items": [
@@ -272,9 +258,7 @@ Response:
 
 ```http
 HTTP/1.1 200 OK
-```
 
-```json
 {
   "learnapi": "1.0.0-rfc-1",
   "items": [
