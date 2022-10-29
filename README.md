@@ -2,7 +2,7 @@
 
 <b>Learn API</b> is the proposal specification standard for fetching details of learning content and user learning state available under given Internet domain.
 
-This is an RFC, so if you have some ideas or thoughts regarding it, please submit an issue in this repository.
+This is an RFC, if you have some ideas or thoughts regarding it, please submit an issue in this repository.
 
 The working example of Learn API you can find in [the exemplary Next.js project](https://github.com/learntray/nextjs-learning-website).
 
