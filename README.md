@@ -4,7 +4,7 @@
 
 This is an RFC, if you have some ideas or thoughts regarding it, please submit an issue in this repository.
 
-The working example of Learn API you can find in [the exemplary Next.js project](https://github.com/learntray/nextjs-learning-website).
+The working example of Learn API you can find in [the exemplary Next.js with Supabase project](https://github.com/learntray/nextjs-supabase-learning-website).
 
 ## Table of content
 
