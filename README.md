@@ -1,10 +1,10 @@
-# Domain Learn API open specification RFC
+# Domain Action API open specification RFC
 
-<b>Learn API</b> is the proposal specification standard for fetching details of learning content and user learning state available under given Internet domain.
+<b>Action API</b> is the proposal specification standard for fetching details of actionable items and user actionable items state available under given Internet domain.
 
 This is an RFC, if you have some ideas or thoughts regarding it, please submit an issue in this repository.
 
-The working example of Learn API you can find in [the exemplary Next.js with Supabase project](https://github.com/learntray/nextjs-supabase-learning-website).
+The working example of Action API you can find in [the exemplary Next.js with Supabase project](https://github.com/learntray/nextjs-supabase-learning-website).
 
 ## Table of content
 
@@ -14,38 +14,38 @@ The working example of Learn API you can find in [the exemplary Next.js with Sup
 
 ## Specification
 
-Specification of `Learn API` version `1.0.0-rfc-1`.
+Specification of `Action API` version `1.0.0-rfc-1`.
 
-Learn API can be implemented using `REST API` with the following endpoints:
+Action API can be implemented using `REST API` with the following endpoints:
 
-`/learnapi`
+`/actionapi`
 
-Returns Learn API version.
+Returns Action API version.
 
-`/learnapi/items`
+`/actionapi/items`
 
-Returns JSON with learning items representing available learning content.
+Returns JSON with actionable items representing available actionable content.
 
-`/learnapi/state`
+`/actionapi/state`
 
-Returns JSON with learning state for learning items.
+Returns JSON with actionable items state for actionable items.
 
-`/learnapi/join`
+`/actionapi/join`
 
-Joins items to start recording their learning state for a given user.
+Joins items to start recording their actionable items state for a given user.
 
-`/learnapi/auth`
+`/actionapi/auth`
 
-Returns temporary auth token or learning token. Once auth token is used, the server should revoke it and another auth token should be requested again in order to use it for receiving learning token - auth token is one-time use token, while learning token is multi-use token and should be kept in secret. Auth token should be also automatically revoked after short period of time, like 60 seconds, if no used at all.
+Returns temporary auth token or actionable token. Once auth token is used, the server should revoke it and another auth token should be requested again in order to use it for receiving actionable token - auth token is one-time use token, while actionable token is multi-use token and should be kept in secret. Auth token should be also automatically revoked after short period of time, like 60 seconds, if no used at all.
 
 ## Examples
 
-1. Ping to check Learn API version
+1. Ping to check Action API version
 
 Request:
 
 ```http
-GET /learnapi HTTP/1.1
+GET /actionapi HTTP/1.1
 ```
 
 Response:
@@ -54,17 +54,17 @@ Response:
 HTTP/1.1 200 OK
 
 {
-  "learnapi": "1.0.0-rfc-1"
+  "actionapi": "1.0.0-rfc-1"
 }
 ```
 
-2. Query for available learing content
+2. Query for available actionable items
 
 Request:
 
 ```http
-GET /learnapi/items HTTP/1.1
-Authorization: Bearer <optional-learning-token>
+GET /actionapi/items HTTP/1.1
+Authorization: Bearer <optional-action-token>
 ```
 
 Response:
@@ -73,13 +73,37 @@ Response:
 HTTP/1.1 200 OK
 
 {
-  "learnapi": "1.0.0-rfc-1",
+  "actionapi": "1.0.0-rfc-1",
   "items": [
     {
-      "id": "introduction.example.com",
-      "name": "Website Introduction Article",
-      "url": "https://example.com/introductions/example",
-      "description": "Example Introduction Article"
+      "id": "orders.example.com",
+      "name": "Colorful T-shirt",
+      "url": "https://example.com/products/colorful-t-shirt",
+      "description": "Example Bought Product",
+      "steps": [
+        {
+          "id": "ordered",
+          "name": "Ordered"
+        },
+        {
+          "id": "paid",
+          "name": "Paid"
+        },
+        {
+          "id": "sent",
+          "name": "Sent"
+        },
+        {
+          "id": "shipped",
+          "name": "Shipped"
+        }
+      ]
+    },
+    {
+      "id": "products.example.com",
+      "name": "Course Subscription 1 Year Renewal",
+      "url": "https://example.com/orders/1-year-subscription",
+      "description": "Example Product to Sale"
     },
     {
       "id": "tutorial.example.com",
@@ -105,13 +129,13 @@ HTTP/1.1 200 OK
 }
 ```
 
-3. Query for learning items state
+3. Query for actionable items state
 
 Request:
 
 ```http
-GET /learnapi/state HTTP/1.1
-Authorization: Bearer <optional-learning-token>
+GET /actionapi/state HTTP/1.1
+Authorization: Bearer <optional-action-token>
 ```
 
 Response:
@@ -120,7 +144,7 @@ Response:
 HTTP/1.1 200 OK
 
 {
-  "learnapi": "1.0.0-rfc-1",
+  "actionapi": "1.0.0-rfc-1",
   "state": [
     {
       "userId": "john",
@@ -177,8 +201,8 @@ HTTP/1.1 200 OK
 Request:
 
 ```http
-GET /learnapi/auth HTTP/1.1
-Authorization: Bearer <learning-token>
+GET /actionapi/auth HTTP/1.1
+Authorization: Bearer <action-token>
 ```
 
 Response:
@@ -187,17 +211,17 @@ Response:
 HTTP/1.1 200 OK
 
 {
-  "learnapi": "1.0.0-rfc-1",
+  "actionapi": "1.0.0-rfc-1",
   "authToken": "<auth-token>"
 }
 ```
 
-5. Query for learning token
+5. Query for actionable token
 
 Request:
 
 ```http
-GET /learnapi/auth HTTP/1.1
+GET /actionapi/auth HTTP/1.1
 Authorization: Bearer <auth-token>
 ```
 
@@ -207,17 +231,17 @@ Response:
 HTTP/1.1 200 OK
 
 {
-  "learnapi": "1.0.0-rfc-1",
-  "learningToken": "<learning-token>"
+  "actionapi": "1.0.0-rfc-1",
+  "actionToken": "<action-token>"
 }
 ```
 
-6. Query for learning token (creates new one, it signals the need to later on either create new user or attach it to existing user)
+6. Query for actionable token (creates new one, it signals the need to later on either create new user or attach it to existing user)
 
 Request:
 
 ```http
-GET /learnapi/auth HTTP/1.1
+GET /actionapi/auth HTTP/1.1
 ```
 
 Response:
@@ -226,21 +250,21 @@ Response:
 HTTP/1.1 200 OK
 
 {
-  "learnapi": "1.0.0-rfc-1",
-  "learningToken": "<learning-token>"
+  "actionapi": "1.0.0-rfc-1",
+  "actionToken": "<action-token>"
 }
 ```
 
-7. Query to join learning items
+7. Query to join actionable items
 
 Request:
 
 ```http
-POST /learnapi/join HTTP/1.1
-Authorization: Bearer <learning-token>
+POST /actionapi/join HTTP/1.1
+Authorization: Bearer <action-token>
 
 {
-  "learnapi": "1.0.0-rfc-1",
+  "actionapi": "1.0.0-rfc-1",
   "items": [
     {
       "userId": "john",
@@ -260,7 +284,7 @@ Response:
 HTTP/1.1 200 OK
 
 {
-  "learnapi": "1.0.0-rfc-1",
+  "actionapi": "1.0.0-rfc-1",
   "items": [
     {
       "userId": "john",
@@ -277,5 +301,3 @@ HTTP/1.1 200 OK
 ## Specification development
 
 The specification is developed by [@orzechdev](https://github.com/orzechdev). If you have any questions or feedback please create an issue in this repository.
-
-For previous deprecated `learnme.json` specification file please go [here](LEARNME.md).
