@@ -1,4 +1,4 @@
-# Domain Action API open specification RFC
+# Domain Web Action API open specification RFC
 
 <b>Action API</b> is the proposal specification standard for fetching details of actionable items and user actionable items state available under given Internet domain.
 
