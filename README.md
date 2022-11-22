@@ -30,10 +30,6 @@ Returns JSON with actionable items representing available actionable content.
 
 Returns JSON with actionable items state for actionable items.
 
-`/actionapi/join`
-
-Joins items to start recording their actionable items state for a given user.
-
 `/actionapi/auth`
 
 Returns temporary auth token or actionable token. Once auth token is used, the server should revoke it and another auth token should be requested again in order to use it for receiving actionable token - auth token is one-time use token, while actionable token is multi-use token and should be kept in secret. Auth token should be also automatically revoked after short period of time, like 60 seconds, if no used at all.
@@ -252,49 +248,6 @@ HTTP/1.1 200 OK
 {
   "actionapi": "1.0.0-rfc-1",
   "actionToken": "<action-token>"
-}
-```
-
-7. Query to join actionable items
-
-Request:
-
-```http
-POST /actionapi/join HTTP/1.1
-Authorization: Bearer <action-token>
-
-{
-  "actionapi": "1.0.0-rfc-1",
-  "items": [
-    {
-      "userId": "john",
-      "itemId": "introduction.example.com"
-    },
-    {
-      "userId": "john",
-      "itemId": "tutorial.example.com"
-    }
-  ]
-}
-```
-
-Response:
-
-```http
-HTTP/1.1 200 OK
-
-{
-  "actionapi": "1.0.0-rfc-1",
-  "items": [
-    {
-      "userId": "john",
-      "itemId": "introduction.example.com"
-    },
-    {
-      "userId": "john",
-      "itemId": "tutorial.example.com"
-    }
-  ]
 }
 ```
 
