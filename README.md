@@ -75,9 +75,6 @@ HTTP/1.1 200 OK
 
 {
   "actionapi": "1.0.0-rfc-1",
-  "categories": [
-    "learning", "commerce", "management"
-  ],
   "items": [
     {
       "id": "tutorial.example.com",
