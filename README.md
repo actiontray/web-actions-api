@@ -1,6 +1,6 @@
 # Domain Web Action API open specification RFC
 
-<b>Action API</b> is the proposal specification standard for fetching details of actionable items and user actionable items state available under given Internet domain.
+<b>Action API</b> is the proposal specification standard for fetching details of actionable items with their state available under given Internet domain.
 
 This is an RFC, if you have some ideas or thoughts regarding it, please submit an issue in this repository.
 
@@ -8,9 +8,14 @@ The working example of Action API you can find in [the exemplary Next.js with Su
 
 ## Table of content
 
+- [Objective](#objective)
 - [Specification](#specification)
 - [Examples](#examples)
 - [Specification development](#specification-development)
+
+## Objective
+
+The current Internet and software have created solutions which helped people to solve many problems. Although the observation of the author of this specification has concluded that there has not been yet created specification for communication standard which will fetch details of actionable items with their state available under given Internet domain. These actionable items might represent any type of typical actions performed on behalf of domain e.g. course learning state, shop order state, delegted task state. Users of this API could get knowledge about what new actions has occured on given Internet domains and what are the states of these actions. The control of these actions could not be performed via this API, API could only play representational role of these actions, what is the important assumption which guarantees freedom for domains in performing these actions and in choosing a way of performing them.
 
 ## Specification
 
@@ -24,15 +29,15 @@ Returns Action API version.
 
 `/actionapi/items`
 
-Returns JSON with actionable items representing available actionable content.
+Returns JSON with actionable items.
 
 `/actionapi/state`
 
-Returns JSON with actionable items state for actionable items.
+Returns JSON with state of actionable items.
 
 `/actionapi/auth`
 
-Returns temporary auth token or actionable token. Once auth token is used, the server should revoke it and another auth token should be requested again in order to use it for receiving actionable token - auth token is one-time use token, while actionable token is multi-use token and should be kept in secret. Auth token should be also automatically revoked after short period of time, like 60 seconds, if no used at all.
+Returns JSON with temporary auth token or action token. Once auth token is used, the server should revoke it and another auth token should be requested again in order to use it for receiving action token - auth token is one-time use token, while action token is multi-use token and should be kept in secret. Auth token should be also automatically revoked after short period of time, like 60 seconds, if no used at all.
 
 ## Examples
 
@@ -70,12 +75,41 @@ HTTP/1.1 200 OK
 
 {
   "actionapi": "1.0.0-rfc-1",
+  "categories": [
+    "commerce", "learning"
+  ],
   "items": [
     {
-      "id": "orders.example.com",
+      "id": "tutorial.example.com",
+      "name": "Website Tutorial",
+      "url": "https://example.com/tutorials/example",
+      "description": "Example Website Tutorial",
+      "categories": [
+        "learning"
+      ],
+      "steps": [
+        {
+          "id": "step-1",
+          "name": "Step 1"
+        },
+        {
+          "id": "step-2",
+          "name": "Step 2"
+        },
+        {
+          "id": "step-3",
+          "name": "Step 3"
+        }
+      ]
+    },
+    {
+      "id": "1.orders.example.com",
       "name": "Colorful T-shirt",
       "url": "https://example.com/products/colorful-t-shirt",
       "description": "Example Bought Product",
+      "categories": [
+        "commerce"
+      ],
       "steps": [
         {
           "id": "ordered",
@@ -96,29 +130,12 @@ HTTP/1.1 200 OK
       ]
     },
     {
-      "id": "products.example.com",
-      "name": "Course Subscription 1 Year Renewal",
-      "url": "https://example.com/orders/1-year-subscription",
-      "description": "Example Product to Sale"
-    },
-    {
-      "id": "tutorial.example.com",
-      "name": "Website Tutorial",
-      "url": "https://example.com/tutorials/example",
-      "description": "Example Website Tutorial",
-      "steps": [
-        {
-          "id": "step-1",
-          "name": "Step 1"
-        },
-        {
-          "id": "step-2",
-          "name": "Step 2"
-        },
-        {
-          "id": "step-3",
-          "name": "Step 3"
-        }
+      "id": "do-something.tasks.example.com",
+      "name": "Task: Do Something",
+      "url": "https://example.com/tasks/do-something",
+      "description": "Example Task",
+      "categories": [
+        "management"
       ]
     }
   ]
@@ -144,49 +161,53 @@ HTTP/1.1 200 OK
   "state": [
     {
       "userId": "john",
-      "itemId": "introduction.example.com",
-      "completed": true
+      "itemId": "tutorial.example.com",
+      "steps": [
+        {
+          "id": "step-1",
+          "completed": true
+        },
+        {
+          "id": "step-2",
+          "completed": true
+        },
+        {
+          "id": "step-3",
+          "completed": false
+        }
+      ]
     },
     {
       "userId": "adam",
-      "itemId": "introduction.example.com",
-      "completed": true
+      "itemId": "1.orders.example.com",
+      "steps": [
+        {
+          "id": "ordered",
+          "completed": true
+        },
+        {
+          "id": "paid",
+          "completed": false
+        },
+        {
+          "id": "sent",
+          "completed": false
+        },
+        {
+          "id": "shipped",
+          "completed": false
+        }
+      ]
     },
     {
       "userId": "john",
-      "itemId": "tutorial.example.com",
-      "steps": [
-        {
-          "id": "step-1",
-          "completed": true
-        },
-        {
-          "id": "step-2",
-          "completed": true
-        },
-        {
-          "id": "step-3",
-          "completed": true
-        }
-      ]
+      "itemId": "do-something.tasks.example.com",
+      "completed": true
     },
     {
       "userId": "adam",
-      "itemId": "tutorial.example.com",
-      "steps": [
-        {
-          "id": "step-1",
-          "completed": false
-        },
-        {
-          "id": "step-2",
-          "completed": false
-        },
-        {
-          "id": "step-3",
-          "completed": false
-        }
-      ]
+      "itemId": "do-something.tasks.example.com",
+      "completed": false
     }
   ]
 }
@@ -212,7 +233,7 @@ HTTP/1.1 200 OK
 }
 ```
 
-5. Query for actionable token
+5. Query for action token
 
 Request:
 
@@ -232,7 +253,7 @@ HTTP/1.1 200 OK
 }
 ```
 
-6. Query for actionable token (creates new one, it signals the need to later on either create new user or attach it to existing user)
+6. Query for action token (creates new one, it signals the need to later on either create new user or attach it to existing user)
 
 Request:
 
