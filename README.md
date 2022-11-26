@@ -1,10 +1,10 @@
-# Domain Web Action API open specification RFC
+# Domain Web Actions API open specification RFC
 
-<b>Action API</b> is the proposal specification standard for fetching details of actionable items with their state available under given Internet domain.
+<b>Web Actions API</b> is the proposal specification standard for fetching details of actionable items with their state available under given Internet domain.
 
 This is an RFC, if you have some ideas or thoughts regarding it, please submit an issue in this repository.
 
-The working example of Action API you can find in [the exemplary Next.js with Supabase project](https://github.com/learntray/nextjs-supabase-learning-website).
+The working example of Web Actions API you can find in [the exemplary Next.js with Supabase project](https://github.com/learntray/nextjs-supabase-learning-website).
 
 ## Table of content
 
@@ -19,13 +19,13 @@ The current Internet and software have created solutions which helped people to 
 
 ## Specification
 
-Specification of `Action API` version `1.0.0-rfc-1`.
+Specification of `Web Actions API` version `1.0.0-rfc-1`.
 
-Action API can be implemented using `REST API` with the following endpoints:
+Web Actions API can be implemented using `REST API` with the following endpoints:
 
 `/actionapi`
 
-Returns Action API version.
+Returns Web Actions API version.
 
 `/actionapi/items`
 
@@ -41,7 +41,7 @@ Returns JSON with temporary auth token or action token. Once auth token is used,
 
 ## Examples
 
-1. Ping to check Action API version
+1. Ping to check Web Actions API version
 
 Request:
 
