@@ -4,7 +4,7 @@
 
 This is an RFC, if you have some ideas or thoughts regarding it, please submit an issue in this repository.
 
-The working example of Web Actions API you can find in [the exemplary Next.js with Supabase project](https://github.com/learntray/nextjs-supabase-learning-website).
+Web Actions API has 1:1 similarity to [Learn API](https://github.com/learntray/learn-api), for which the exemplary usage you can find in [the exemplary Next.js with Supabase project](https://github.com/learntray/nextjs-supabase-learning-website).
 
 ## Table of content
 
@@ -102,7 +102,7 @@ HTTP/1.1 200 OK
     {
       "id": "1.orders.example.com",
       "name": "Colorful T-shirt",
-      "url": "https://example.com/products/colorful-t-shirt",
+      "url": "https://example.com/orders/1",
       "description": "Example Bought Product",
       "categories": [
         "commerce"
