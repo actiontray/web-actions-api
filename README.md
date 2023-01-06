@@ -4,7 +4,9 @@
 
 This is an RFC, if you have some ideas or thoughts regarding it, please submit an issue in this repository.
 
-Web Actions API has 1:1 similarity to [Learn API](https://github.com/learntray/learn-api), for which the exemplary usage you can find in [the exemplary Next.js with Supabase project](https://github.com/learntray/nextjs-supabase-learning-website).
+Web Actions API examplary usage you can find in [the exemplary Next.js with Supabase project](https://github.com/actiontray/nextjs-supabase-events-website).
+
+Web Actions API has 1:1 similarity to [Learn API](https://github.com/learntray/learn-api), for which the exemplary usage you can find in [another exemplary Next.js with Supabase educational project](https://github.com/learntray/nextjs-supabase-learning-website).
 
 ## Table of content
 
